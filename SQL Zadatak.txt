@@ -1,0 +1,9 @@
+﻿- Izlistati sve Customer-e koji su kreirali nalog u poslednjih godinu dana, a imaju najmanje 3 kreirana profila.
+
+SELECT Customer.username, COUNT(Profile.id)
+FROM customer Customer
+JOIN Profile 
+ON Customer.id = Profile.customer_id
+WHERE Customer.creation_date >= now() - interval '1 year'
+GROUP BY Customer.id
+HAVING COUNT(Profile.id) >= 3;
